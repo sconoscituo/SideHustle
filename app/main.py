@@ -6,7 +6,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import init_db
-from app.routers import ideas, users
+from app.routers import ideas, users, income_tracker
 from app.config import get_settings
 
 settings = get_settings()
@@ -40,6 +40,7 @@ app.add_middleware(
 # 라우터 등록
 app.include_router(users.router)
 app.include_router(ideas.router)
+app.include_router(income_tracker.router, prefix="/api/v1")
 
 
 @app.get("/", tags=["헬스체크"])
